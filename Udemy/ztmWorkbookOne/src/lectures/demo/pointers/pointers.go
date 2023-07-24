@@ -28,4 +28,10 @@ func main() {
 	replace(&greet, "Hi", &counter)
 	fmt.Println(greet, world)
 
+	phrase := []string{greet, world}
+	fmt.Println(phrase)
+
+	replace(&phrase[1], "Go!", &counter)
+	fmt.Println(phrase)
+
 }
