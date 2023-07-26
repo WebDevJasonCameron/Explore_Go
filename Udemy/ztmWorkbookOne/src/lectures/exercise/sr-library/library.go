@@ -34,7 +34,7 @@ type LendAudit struct {
 
 type Member struct {
 	name  Name
-	books map[Title]LendAudit
+	books map[Title]LendAudit // dict w/ a Title (string) as key, & LendAudit (struct) as value
 }
 
 type BookEntry struct {
@@ -43,7 +43,7 @@ type BookEntry struct {
 }
 
 type Library struct {
-	members map[Name]Member
+	members map[Name]Member // dict w/ a Name (string) as key, & Member (stuct) as value [also having name and books]
 	books   map[Title]BookEntry
 }
 
