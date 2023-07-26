@@ -59,7 +59,7 @@ func printMemberAudit(member *Member) {
 	}
 }
 
-func printMemberAudit(library *Library) {
+func printMemberAudits(library *Library) {
 	for _, member := range library.members {
 		printMemberAudit(&member)
 	}
@@ -116,4 +116,48 @@ func returnBook(library *Library, title Title, member *Member) bool {
 
 func main() {
 
+	library := Library{
+		books:   make(map[Title]BookEntry),
+		members: make(map[Name]Member),
+	}
+
+	library.books["Webapps in Go"] = BookEntry{
+		total:  4,
+		lended: 0,
+	}
+	library.books["The Little Go Book"] = BookEntry{
+		total:  3,
+		lended: 0,
+	}
+	library.books["Let's Learn Go"] = BookEntry{
+		total:  2,
+		lended: 0,
+	}
+	library.books["Go Bootcamp"] = BookEntry{
+		total:  1,
+		lended: 0,
+	}
+
+	library.members["Jason"] = Member{"Jason", make(map[Title]LendAudit)}
+	library.members["Calvin"] = Member{"Calvin", make(map[Title]LendAudit)}
+	library.members["Mocha"] = Member{"Mocha", make(map[Title]LendAudit)}
+
+	fmt.Println("\nInital:")
+	printLibraryBooks(&library)
+	printMemberAudits(&library)
+
+	member := library.members["Jason"]
+	checkedOut := checkoutBook(&library, "Go Bootcamp", &member)
+	fmt.Println("\nCheck out a book:")
+	if checkedOut {
+		printLibraryBooks(&library)
+		printMemberAudits(&library)
+	}
+
+	returned := returnBook(&library, "Go Bootcamp", &member)
+	fmt.Println("\nCheck in a book:")
+	if returned {
+		printLibraryBooks(&library)
+		printMemberAudits(&library)
+	}
 }
