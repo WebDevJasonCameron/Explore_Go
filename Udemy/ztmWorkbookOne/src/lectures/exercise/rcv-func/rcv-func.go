@@ -16,6 +16,32 @@ package main
 
 import "fmt"
 
+type Player struct {
+	name              string
+	health, maxHealth uint
+	energy, maxEnergy uint
+}
+
+func (player *Player) addHealth(amount uint) {
+	player.health += uint(amount)
+
+	if player.health > player.maxHealth {
+		player.health = player.maxHealth
+	}
+
+	fmt.Println(player.name, "Add", amount, "health ->", player.health)
+}
+
+func (player *Player) applyDamage(amount uint) {
+	if player.health-amount > player.health {
+		player.health = 0
+	} else {
+		player.health -= amount
+	}
+
+	fmt.Println(player.name, "Damage", amount, "->", player.health)
+}
+
 func main() {
 
 }
