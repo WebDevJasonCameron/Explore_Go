@@ -3,17 +3,17 @@ package main
 import "fmt"
 
 const (
-	Low    = iota
+	Low = iota
 	Medium
 	High
 )
 
-func PriorityQueue[P comparable, V any] struct {
-	items map[P][]V
+type PriorityQueue[P comparable, V any] struct {
+	items      map[P][]V
 	priorities []P
 }
 
-func(pq *PriorityQueue[P, V]) Add(priority P, value V) {
+func (pq *PriorityQueue[P, V]) Add(priority P, value V) {
 	pq.items[priority] = append(pq.items[priority], value)
 }
 
@@ -53,7 +53,5 @@ func main() {
 	fmt.Println(queue.Next())
 	fmt.Println(queue.Next())
 	fmt.Println(queue.Next())
-
-
 
 }
