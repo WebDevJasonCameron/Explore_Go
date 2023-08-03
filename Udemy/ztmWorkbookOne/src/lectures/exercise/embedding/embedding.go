@@ -75,6 +75,6 @@ func main() {
 	//* Print out a 5-second average from each component using promoted
 	//  methods on the Dashboard
 	fmt.Printf("Average bandwidth usage: %v\n", dash.AverageBandwidth())
-	fmt.Printf("Average temp usage: %v\n", dash.AverageCpuTemp())
+	fmt.Printf("Average temp: %v\n", dash.AverageCpuTemp())
 	fmt.Printf("Average memory usage: %v\n", dash.AverageMemoryUsage())
 }
