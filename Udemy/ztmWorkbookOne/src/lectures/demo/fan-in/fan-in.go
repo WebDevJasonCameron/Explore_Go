@@ -14,6 +14,7 @@ import (
 	"log"
 	"os"
 	"strings"
+	"sync"
 
 	"github.com/chai2010/webp"
 	"github.com/google/uuid"
@@ -74,11 +75,50 @@ func saveToDisk(imgBuf bytes.Buffer) string {
 	return filename
 }
 
+func fanIn[T any](channels ...<-chan T) <-chan T {
+	var wg sync.WaitGroup
+	out := make(chan T)
+
+	wg.Add(len(channels))
+
+	for _, ch := range channels {
+		go func(in <-chan T) {
+			for i := range in {
+				out <- i
+			}
+			wg.Done()
+		}(ch)
+	}
+
+	go func() {
+		wg.Wait()
+		close(out)
+	}()
+
+	return out
+}
+
 func main() {
 	base64Images := makeWork(img1, img2, img3)
-	rawImages := pipeline(base64Images, base64ToRawImage)
-	webpImages := pipeline(rawImages, encodeToWebp)
-	filenames := pipeline(webpImages, saveToDisk)
+
+	// Stage 1
+	rawImage1 := pipeline(base64Images, base64ToRawImage)
+	rawImage2 := pipeline(base64Images, base64ToRawImage)
+	rawImage3 := pipeline(base64Images, base64ToRawImage)
+	rawImages := fanIn(rawImage1, rawImage2, rawImage3)
+
+	// Stage 2
+	webpImage1 := pipeline(rawImages, encodeToWebp)
+	webpImage2 := pipeline(rawImages, encodeToWebp)
+	webpImage3 := pipeline(rawImages, encodeToWebp)
+	webpImages := fanIn(webpImage1, webpImage2, webpImage3)
+
+	// Stage 3
+	filename1 := pipeline(webpImages, saveToDisk)
+	filename2 := pipeline(webpImages, saveToDisk)
+	filename3 := pipeline(webpImages, saveToDisk)
+	filenames := fanIn(filename1, filename2, filename3)
+
 	for name := range filenames {
 		fmt.Println(name)
 	}
