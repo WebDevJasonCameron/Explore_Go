@@ -30,7 +30,7 @@ func main() {
 
 	webServer := sampleOperation(ctx, "webserver", 200)
 	microservice := sampleOperation(ctx, "microservice", 500)
-	database := sampleOperation(ctx, "database", 900)
+	database := sampleOperation(ctx, "database", 9.00)
 
 ManLoop:
 	for {
