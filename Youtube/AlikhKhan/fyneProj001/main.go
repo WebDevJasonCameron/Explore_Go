@@ -1,21 +1,16 @@
 package main
 
 import (
-	"fmt"
-
+	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 )
 
 func main() {
 
-	fmt.Println("Test Fyne....")
+	myApp := app.New()
+	myWin := myApp.NewWindow("My new title")
 
-	// Start with go mod init myapp to create a package
-	// Creating a new app
-	a := app.New()
+	myWin.Resize(fyne.NewSize(200, 400))
 
-	// Create a new window
-	w := a.NewWindow("My new title")
-
-	w.ShowAndRun()
+	myWin.ShowAndRun()
 }
