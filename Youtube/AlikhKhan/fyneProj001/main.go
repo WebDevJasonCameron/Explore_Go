@@ -1,9 +1,9 @@
 package main
 
 import (
-	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
-	"fyne.io/fyne/widget"
+	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/widget"
 )
 
 func main() {
@@ -11,8 +11,14 @@ func main() {
 	myApp := app.New()
 	win := myApp.NewWindow("My new App Title")
 
-	win.Resize(fyne.NewSize(500, 300)) // width, height
-	win.SetContent(widget.NewLabel("My first Lable"))
+	hello := widget.NewLabel("Hello Wolrd")
+
+	win.SetContent(container.NewVBox(
+		hello,
+		widget.NewButton("Hi", func() {
+			hello.SetText("Welcome (^>.<^)")
+		}),
+	))
 
 	win.ShowAndRun()
 }
