@@ -3,14 +3,16 @@ package main
 import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
+	"fyne.io/fyne/widget"
 )
 
 func main() {
 
 	myApp := app.New()
-	myWin := myApp.NewWindow("My new title")
+	win := myApp.NewWindow("My new App Title")
 
-	myWin.Resize(fyne.NewSize(200, 400))
+	win.Resize(fyne.NewSize(500, 300)) // width, height
+	win.SetContent(widget.NewLabel("My first Lable"))
 
-	myWin.ShowAndRun()
+	win.ShowAndRun()
 }
