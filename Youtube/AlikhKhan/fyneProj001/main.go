@@ -1,24 +1,30 @@
 package main
 
 import (
+	"log"
+
 	"fyne.io/fyne/v2/app"
-	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
 )
 
 func main() {
 
 	myApp := app.New()
-	win := myApp.NewWindow("My new App Title")
+	myWindow := myApp.NewWindow("My new App Title")
 
-	hello := widget.NewLabel("Hello Wolrd")
+	//textContent := widget.NewLabel("Hello Wolrd")
 
-	win.SetContent(container.NewVBox(
-		hello,
-		widget.NewButton("Hi", func() {
-			hello.SetText("Welcome (^>.<^)")
-		}),
-	))
+	content := widget.NewButton("click me", func() {
+		log.Println("Tapped")
+	})
 
-	win.ShowAndRun()
+	myWindow.SetContent(content)
+	// myWindow.SetContent(container.NewVBox(
+	// 	textContent,
+	// 	widget.NewButton("Hi", func() {
+	// 		textContent.SetText("Welcome (^>.<^)")
+	// 	}),
+	// ))
+
+	myWindow.ShowAndRun()
 }
