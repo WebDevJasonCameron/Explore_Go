@@ -11,10 +11,18 @@ func main() {
 	w := a.NewWindow("Hellow World")
 
 	w.SetContent(widget.NewLabel("Hello World!"))
+	w.SetMaster()
 	w.Show()
 
 	w2 := a.NewWindow("Larger")
 	w2.SetContent(widget.NewLabel("More Content"))
+
+	w2.SetContent(widget.NewButton("Open new", func() {
+		w3 := a.NewWindow("Third")
+		w3.SetContent(widget.NewLabel("Third"))
+		w3.Show()
+	}))
+
 	w2.Resize(fyne.NewSize(100, 100))
 	w2.Show()
 
