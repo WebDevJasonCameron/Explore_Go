@@ -10,12 +10,15 @@ import (
 
 func main() {
 	a := app.New()
-	w := a.NewWindow("Line")
+	w := a.NewWindow("circle")
 
-	line := canvas.NewLine(color.White)
-	line.StrokeWidth = 5
-	w.SetContent(line)
+	circle := canvas.NewCircle(color.White)
+	circle.StrokeColor = color.Gray{0x99}
+	circle.StrokeWidth = 5
+
+	w.SetContent(circle)
 
 	w.Resize(fyne.NewSize(150, 150))
 	w.ShowAndRun()
+
 }
