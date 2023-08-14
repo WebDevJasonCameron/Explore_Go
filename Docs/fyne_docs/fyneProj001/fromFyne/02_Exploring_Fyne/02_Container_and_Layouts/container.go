@@ -7,7 +7,7 @@ import (
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
-	//"fyne.io/fyne/v2/layout"
+	"fyne.io/fyne/v2/layout" // this was used for the layout.NewGridLayout
 )
 
 func main() {
@@ -18,7 +18,8 @@ func main() {
 	text1 := canvas.NewText("Hello", green)
 	text2 := canvas.NewText("There", green)
 	text2.Move(fyne.NewPos(20, 20))
-	content := container.NewWithoutLayout(text1, text2)
+	// content := container.NewWithoutLayout(text1, text2)
+	content := container.New(layout.NewGridLayout(2), text1, text2)
 
 	myWindow.SetContent(content)
 	myWindow.Resize(fyne.NewSize(150, 150))
