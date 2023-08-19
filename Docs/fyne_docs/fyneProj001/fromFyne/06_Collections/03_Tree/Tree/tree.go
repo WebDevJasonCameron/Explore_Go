@@ -31,7 +31,6 @@ func main() {
 			return widget.NewLabel("Leaf template")
 		},
 		func(id widget.TreeNodeID, branch bool, o fyne.CanvasObject) {
-
 			text := id
 
 			if branch {
