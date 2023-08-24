@@ -14,7 +14,6 @@ CREATE TABLE person (
 	id SERIAL PRIMARY KEY,
 	name TEXT,
 	email TEXT NOT NULL,
-	books []book
 );
 CREATE TABLE book (
 	id SERIAL PRIMARY KEY,
@@ -25,21 +24,25 @@ CREATE TABLE book (
 CREATE TABLE person_to_book_ownership (
 	person_id,
 	book_id
-)
+);
 `
 
 // STRUCTs
 type Person struct {
+	id    uint32
 	Name  string
 	Email string
-	Books []Book
 }
 
 type Book struct {
+	id         uint32
 	Title      string
 	Author     string
 	CallNumber string
-	PersonID   int
+}
+
+type PersonToBookOwnership struct {
+	PersonID []Person
 }
 
 func main() {
