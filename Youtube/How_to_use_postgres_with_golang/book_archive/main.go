@@ -5,19 +5,40 @@ import (
 	"os"
 
 	"github.com/jmoiron/sqlx"
+	_ "github.com/lib/pq"
 )
+
+// SCHEMA
+var schema = `
+CREATE TABLE person (
+	id SERIAL PRIMARY KEY,
+	name TEXT,
+	email TEXT NOT NULL,
+	books []book
+);
+CREATE TABLE book (
+	id SERIAL PRIMARY KEY,
+	title TEXT,
+	author TEXT,
+	call_number TEXT,
+);
+CREATE TABLE person_to_book_ownership (
+	person_id,
+	book_id
+)
+`
 
 // STRUCTs
 type Person struct {
 	Name  string
-	Email string `gorm:"typevarchar(100);unique_index`
+	Email string
 	Books []Book
 }
 
 type Book struct {
 	Title      string
 	Author     string
-	CallNumber string `gorm:"unique_index`
+	CallNumber string
 	PersonID   int
 }
 
