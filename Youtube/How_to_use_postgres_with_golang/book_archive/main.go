@@ -43,6 +43,7 @@ type Book struct {
 
 type PersonToBookOwnership struct {
 	PersonID []Person
+	BookID   []Book
 }
 
 func main() {
