@@ -1,4 +1,4 @@
-****# Notes
+# Notes
 
 Instructions found at the following site
 
